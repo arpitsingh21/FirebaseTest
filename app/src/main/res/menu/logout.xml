@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.medikoe.connect.androidmedikoeconnect.deal.DealActivity">
+    <item
+            android:id="@+id/action_filter"
+            android:icon="@drawable/login"
+            android:orderInCategory="100"
+            android:title="Logout"
+            android:visible="true"
+            app:showAsAction="always" />
+</menu>

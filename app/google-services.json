@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "735562261625",
+    "firebase_url": "https://minidubsmash-65f80.firebaseio.com",
+    "project_id": "minidubsmash-65f80",
+    "storage_bucket": "minidubsmash-65f80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735562261625:android:e41916e235f9fc5d",
+        "android_client_info": {
+          "package_name": "com.mobicomkit.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735562261625-ul7qcaapjpe84r77p4vv018pvbrv7fh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk3cdXR53EMFt2oDQnmc_-fYQ4aeP8Ups"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735562261625:android:4fb6852fc185170f",
+        "android_client_info": {
+          "package_name": "ne.application.com.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735562261625-ul7qcaapjpe84r77p4vv018pvbrv7fh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk3cdXR53EMFt2oDQnmc_-fYQ4aeP8Ups"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
