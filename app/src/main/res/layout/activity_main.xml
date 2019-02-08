@@ -9,7 +9,7 @@
     <android.support.v7.widget.RecyclerView
             android:id="@+id/gridRv"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
@@ -17,6 +17,7 @@
             android:id="@+id/progress_circular"
             android:layout_width="match_parent"
             android:indeterminate="true"
+            android:visibility="gone"
             android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

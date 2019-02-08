@@ -9,13 +9,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListener {
     val db = FirebaseFirestore.getInstance()
-    lateinit var meditationList: List<MeditationModel>
+     var meditationList:MutableList<MeditationModel> = mutableListOf<MeditationModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,10 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
     }
 
     private fun fetchMeditationDetails() {
-        db.collection("meditation").document("relax").get().addOnSuccessListener { document ->
+        db.collection("meditation").document("calm_down").get().addOnSuccessListener { document ->
             if (document != null) {
                 Log.d("Firebase", "DocumentSnapshot data: " + document.data)
-                setData(document.data)
+                loadCalmDownData(document.data)
             } else {
                 Log.d("Firebase", "No such document")
             }
@@ -40,7 +41,17 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
         db.collection("meditation").document("destress").get().addOnSuccessListener { document ->
             if (document != null) {
                 Log.d("Firebase", "DocumentSnapshot data: " + document.data)
-                setData(document.data)
+                loadDestressData(document.data)
+            } else {
+                Log.d("Firebase", "No such document")
+            }
+        }.addOnFailureListener { exception ->
+            Log.d("Firebase", "get failed with ", exception)
+        }
+        db.collection("meditation").document("focus").get().addOnSuccessListener { document ->
+            if (document != null) {
+                Log.d("Firebase", "DocumentSnapshot data: " + document.data)
+                loadFocusData(document.data)
             } else {
                 Log.d("Firebase", "No such document")
             }
@@ -50,17 +61,7 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
         db.collection("meditation").document("relax").get().addOnSuccessListener { document ->
             if (document != null) {
                 Log.d("Firebase", "DocumentSnapshot data: " + document.data)
-                setData(document.data)
-            } else {
-                Log.d("Firebase", "No such document")
-            }
-        }.addOnFailureListener { exception ->
-            Log.d("Firebase", "get failed with ", exception)
-        }
-        db.collection("meditation").document("relax").get().addOnSuccessListener { document ->
-            if (document != null) {
-                Log.d("Firebase", "DocumentSnapshot data: " + document.data)
-                setData(document.data)
+                loadrelaxData(document.data)
             } else {
                 Log.d("Firebase", "No such document")
             }
@@ -68,6 +69,84 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
             Log.d("Firebase", "get failed with ", exception)
         }
     }
+
+    private fun loadrelaxData(data: Map<String, Any>?) {
+
+        val doingNow = data!!.get("doing_right_now")
+        val name = data!!.get("name")
+        Log.d("Firebase", doingNow.toString())
+
+        db.collection("meditation").document("relax").collection("session").document("93uqxpczvwqke9Lkxka2").get().addOnCompleteListener(
+            OnCompleteListener {
+                val imageLink = it.result!!.get("imageLink")
+                val link = it.result!!.get("link")
+                meditationList.add(MeditationModel(
+                    name.toString(), imageLink.toString(), link.toString(),
+                    doingNow.toString()
+                ))
+
+                gridRv.adapter.notifyDataSetChanged()
+
+            })
+    }
+
+    private fun loadFocusData(data: Map<String, Any>?) {
+        val doingNow = data!!.get("doing_right_now")
+        val name = data!!.get("name")
+        Log.d("Firebase", doingNow.toString())
+        Log.d("Firebase", data.get("session").toString())
+        db.collection("meditation").document("focus").collection("session").document("random_document_id").get().addOnCompleteListener(
+            OnCompleteListener {
+                val imageLink = it.result!!.get("imageLink")
+                val link = it.result!!.get("link")
+                meditationList.add(MeditationModel(
+                    name.toString(), imageLink.toString(), link.toString(),
+                    doingNow.toString()
+                ))
+
+                gridRv.adapter.notifyDataSetChanged()
+
+            })
+    }
+
+    private fun loadDestressData(data: Map<String, Any>?) {
+        val doingNow = data!!.get("doing_right_now")
+        val name = data!!.get("name")
+        Log.d("Firebase", doingNow.toString())
+        Log.d("Firebase", data.get("session").toString())
+        db.collection("meditation").document("destress").collection("session").document("F0GMXjGYE52WIDgbV5wd").get().addOnCompleteListener(
+            OnCompleteListener {
+                val imageLink = it.result!!.get("imageLink")
+                val link = it.result!!.get("link")
+                meditationList.add(MeditationModel(
+                    name.toString(), imageLink.toString(), link.toString(),
+                    doingNow.toString()
+                ))
+
+                gridRv.adapter.notifyDataSetChanged()
+
+            })
+    }
+
+    private fun loadCalmDownData(data: Map<String, Any>?) {
+        val doingNow = data!!.get("doing_right_now")
+        val name = data!!.get("name")
+        Log.d("Firebase", doingNow.toString())
+        Log.d("Firebase", data.get("session").toString())
+        db.collection("meditation").document("calm_down").collection("session").document("fmALHnbljymtusTKC6N5").get().addOnCompleteListener(
+            OnCompleteListener {
+                val imageLink = it.result!!.get("imageLink")
+                val link = it.result!!.get("link")
+                meditationList.add(MeditationModel(
+                    name.toString(), imageLink.toString(), link.toString(),
+                    doingNow.toString()
+                ))
+
+                gridRv.adapter.notifyDataSetChanged()
+
+            })
+    }
+
 
     private fun setupRecyclerView() {
         gridRv.layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -103,5 +182,8 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
     }
 
     override fun onItemClick(view: View, position: MeditationModel) {
+
     }
 }
+
+
