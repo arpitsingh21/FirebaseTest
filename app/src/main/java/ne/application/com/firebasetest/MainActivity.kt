@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
 
     private fun setupRecyclerView() {
         gridRv.layoutManager = GridLayoutManager(this@MainActivity, 2)
-        gridRv.adapter = MyRecyclerViewAdapter(this@MainActivity, meditationList)
+        gridRv.adapter = MyRecyclerViewAdapter(this@MainActivity,this@MainActivity, meditationList)
     }
 
     private fun setData(data: Map<String, Any>?) {
@@ -182,7 +182,10 @@ class MainActivity : AppCompatActivity(), MyRecyclerViewAdapter.ItemClickListene
     }
 
     override fun onItemClick(view: View, position: MeditationModel) {
-
+        val userIntent = Intent(this@MainActivity, MeditationActivity::class.java)
+        userIntent.putExtra("ImageLink",position.imageLink)
+        userIntent.putExtra("link",position.mediaLink)
+        startActivity(userIntent)
     }
 }
 

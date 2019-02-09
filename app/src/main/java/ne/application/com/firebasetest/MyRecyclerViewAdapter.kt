@@ -5,16 +5,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Harikesh on 07/02/2019.
  */
 class MyRecyclerViewAdapter// data is passed into the constructor
-internal constructor(context: Context, private val mData: List<MeditationModel>) :
+internal constructor(clickListner :ItemClickListener, context: Context, private val mData: List<MeditationModel>) :
     RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
     private val mInflater: LayoutInflater
-    private var mClickListener: ItemClickListener? = null
+    private var mClickListener: ItemClickListener? = clickListner
 
     init {
         this.mInflater = LayoutInflater.from(context)
@@ -30,6 +32,7 @@ internal constructor(context: Context, private val mData: List<MeditationModel>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val text = mData[position]
         holder.textMeditaion.text = text.text_medication
+        Picasso.get().load(mData.get(position).imageLink).into(holder.imageMeditaion);
     }
 
     // total number of rows
@@ -42,9 +45,10 @@ internal constructor(context: Context, private val mData: List<MeditationModel>)
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         internal var textMeditaion: TextView
-
+        internal var imageMeditaion: ImageView
         init {
             textMeditaion = itemView.findViewById(R.id.text_meditation)
+            imageMeditaion = itemView.findViewById(R.id.imageMeditation)
             itemView.setOnClickListener(this)
         }
 
